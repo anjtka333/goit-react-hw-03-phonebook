@@ -27,6 +27,7 @@ class ContactForm extends Component {
     this.props.onSubmit(this.state);
     this.reset();
   };
+
   render() {
     return (
       <form onSubmit={this.handleOnSubmit} className={s.container}>
