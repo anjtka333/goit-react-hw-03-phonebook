@@ -55,9 +55,23 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts)||[];
-    this.setState({ contacts: parsedContacts });
+    try {
+      const loadContacts = JSON.parse(localStorage.getItem("contacts"));
+      if (Array.isArray(loadContacts)) {
+        console.log(loadContacts);
+        this.setState({
+          contacts: loadContacts,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      this.setState({
+        contacts: [],
+      });
+    }
+    // const contacts = localStorage.getItem("contacts");
+    // const parsedContacts = JSON.parse(contacts)||[];
+    // this.setState({ contacts: parsedContacts });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -84,5 +98,3 @@ class App extends Component {
 }
 
 export default App;
-
-
